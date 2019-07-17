@@ -5,7 +5,12 @@
 	<groupId>com.zhangchao</groupId>
 	<artifactId>SpringBootProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	
+	<!-- 
+		spring-boot-starter-parent 进行版本仲裁，所管理的所有版本查看方法：
+		在其父项目 spring-boot-dependencies中进行指定。
+		没有在dependencies里面管理的依赖自然需要声明版本号。
+	 -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -17,5 +22,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<!--导入配置文件处理器，配置文件进行绑定就会有提示-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+	
+	<!-- 这个插件可以将应用打包成可执行的jar -->
+    <build>
+    	<!-- 打包时指定项目的名称 --> 
+    	<finalName>SpringBoot</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>

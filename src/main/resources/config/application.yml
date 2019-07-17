@@ -1,2 +1,21 @@
+#   语法：不允许使用Tab键进行退格，只能使用空格键
+# k:(空格)v  -- 必须有空格
+
 server:
   port: 8888
+
+#  测试读取配置文件的值
+
+person:
+  last-name: zhangsan
+  age: 12
+  birth: 2017/12/15
+  boss: false
+  maps: {k1: v1,k2: 14}
+  lists:
+    - a
+    - b
+    - c
+  dog:
+    name: dog
+    age: 15

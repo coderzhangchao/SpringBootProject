@@ -1,4 +1,5 @@
 1、maven配置文件中的配置
+<!-- 用JDK1.8编译、运行项目 -->
 <profiles>
 	<profile>
 		<id>jdk‐1.8</id>
@@ -13,3 +14,12 @@
 		</properties>
 	</profile>
 </profiles>
+
+2、读取配置文件的配置：
+	@Component
+	@ConfigurationProperties(prefix = "person")  ---》属性在主配置文件application.yml内部
+	public class Person{}
+	
+	如果读取的属性是单独 的properties文件，使用如下注解：
+	@PropertySource(value = {"classpath:person.properties"})
+	public class Person{}
