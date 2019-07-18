@@ -4,20 +4,30 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.zhangchao.bean.Person;
 
-/**
- * SpringBoot单元测试;
-    *    可以在测试期间很方便的类似编码一样进行自动注入等容器的功能。
- */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BootTest {
 
 	@Autowired
 	Person person;
+	
+	@Autowired
+	ApplicationContext ioc;
+	
+	/**
+	 * 娴嬭瘯@ImportResource(locations= {"classpath:beans.xml"})
+	 */
+	@Test
+	public void testHelloService() {
+		boolean isTrue = ioc.containsBean("helloService");
+		System.out.println(isTrue);
+	}
 	
 	@Test
 	public void contextLoads() {

@@ -1,8 +1,8 @@
-1��maven�����ļ��е�����
-<!-- ��JDK1.8���롢������Ŀ -->
+1、修改Maven的配置文件
+<!-- 使用JDK1.8进行项目的编译，运行，打包 -->
 <profiles>
 	<profile>
-		<id>jdk�\1.8</id>
+		<id>jdk1.8</id>
 		<activation>
 			<activeByDefault>true</activeByDefault>
 			<jdk>1.8</jdk>
@@ -15,11 +15,74 @@
 	</profile>
 </profiles>
 
-2����ȡ�����ļ������ã�
+//******************************************
+2、导入配置文件的方式
+	# 属性在主配置文件中
 	@Component
-	@ConfigurationProperties(prefix = "person")  ---���������������ļ�application.yml�ڲ�
+	@ConfigurationProperties(prefix = "person")
 	public class Person{}
 	
-	�����ȡ�������ǵ��� ��properties�ļ���ʹ������ע�⣺
+	#属性在单独的属性文件中
 	@PropertySource(value = {"classpath:person.properties"})
 	public class Person{}
+	
+//*****************************************
+3、SpringBoot的自动配置原理：
+	1)SpringBoot启动的时候加载主配置类，开启了自动配置功能 @EnableAutoConfiguration
+	2)@EnableAutoConfiguration 作用：
+	@Import(AutoConfigurationImportSelector.class)
+	public @interface EnableAutoConfiguration {
+	利用EnableAutoConfigurationImportSelector给容器中导入一些组件
+	可以查看selectImports()方法的内容
+	SpringFactoriesLoader.loadFactoryNames()
+	扫描所有jar包类路径下 META‐INF/spring.factories
+	把扫描到的这些文件的内容包装成properties对象
+	从properties中获取到EnableAutoConfiguration.class类（类名）对应的值，然后把他们添加在容器
+	中。
+	
+以HttpEncodingAutoConfiguration（Http编码自动配置）为例解释自动配置原理:
+	
+	/*
+	 * 表示这是一个配置类，以前编写的配置文件一样，也可以给容器中添加组件
+	 */
+	@Configuration
+	
+	/* 启动指定类的
+	 * ConfigurationProperties功能；将配置文件中对应的值和HttpEncodingProperties绑定起来；并把
+	 * HttpEncodingProperties加入到ioc容器中
+	 */
+	@EnableConfigurationProperties(HttpEncodingProperties.class)
+	
+	/*
+	 * Spring底层@Conditional注解（Spring注解版），根据不同的条件，如果
+	 * 满足指定的条件，整个配置类里面的配置就会生效； 判断当前应用是否是web应用，如果是，当前配置类生效
+	 */
+	 @ConditionalOnWebApplication
+	
+	/*
+	 * 判断当前项目有没有这个类CharacterEncodingFilter；SpringMVC中进行乱码解决的过滤器；
+	 */
+	@ConditionalOnClass(CharacterEncodingFilter.class)
+	
+	/*
+	 * 判断配置文件中是否存在某个配置 spring.http.encoding.enabled；如果不存在，判断也是成立的
+	 * 即使我们配置文件中不配置pring.http.encoding.enabled=true，也是默认生效的；
+	 */
+	@ConditionalOnProperty(prefix = "spring.http.encoding", value = "enabled", matchIfMissing =true)
+	public class HttpEncodingAutoConfiguration {
+		//他已经和SpringBoot的配置文件映射了
+		//只有一个有参构造器的情况下，参数的值就会从容器中拿
+		public HttpEncodingAutoConfiguration(HttpEncodingProperties properties) {
+			this.properties = properties;
+		}
+		
+		@Bean //给容器中添加一个组件，这个组件的某些值需要从properties中获取
+		@ConditionalOnMissingBean(CharacterEncodingFilter.class) //判断容器没有这个组件？
+		public CharacterEncodingFilter characterEncodingFilter() {
+			CharacterEncodingFilter filter = new OrderedCharacterEncodingFilter();
+			filter.setEncoding(this.properties.getCharset().name());
+			filter.setForceRequestEncoding(this.properties.shouldForce(Type.REQUEST));
+			filter.setForceResponseEncoding(this.properties.shouldForce(Type.RESPONSE));
+			return filter;
+		}
+	}

@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 /**
-    *   标注在某个类上，表示这是一个Spring Boot的配置类
  * @SpringBootConfiguration
  * 
  * @EnableAutoConfiguration
@@ -14,7 +13,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 	@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) 
  * })
  * 
+ * @ImportResource(locations= {"classpath:beans.xml"})
+ * 
  */
+//@ImportResource(locations= {"classpath:beans.xml"})
 @SpringBootApplication
 public class Main {
 

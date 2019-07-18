@@ -1,13 +1,20 @@
-#   Óï·¨£º²»ÔÊĞíÊ¹ÓÃTab¼ü½øĞĞÍË¸ñ£¬Ö»ÄÜÊ¹ÓÃ¿Õ¸ñ¼ü
-# k:(¿Õ¸ñ)v  -- ±ØĞëÓĞ¿Õ¸ñ
+# ä¸èƒ½ä½¿ç”¨Tabé€€æ ¼é”®
+# k:(ç©ºæ ¼)v  -- å¿…é¡»è¦æœ‰ç©ºæ ¼
+
+debug:
+  true
 
 server:
   port: 8888
+  
+spring:
+  profiles:
+    active: prod
 
-#  ²âÊÔ¶ÁÈ¡ÅäÖÃÎÄ¼şµÄÖµ
 
+# æµ‹è¯•è¯»å–é…ç½®æ–‡ä»¶çš„å€¼  ${random.value} ${random.int} ${random.value}
 person:
-  last-name: zhangsan
+  last-name: zhangsan${random.uuid}
   age: 12
   birth: 2017/12/15
   boss: false
@@ -19,3 +26,16 @@ person:
   dog:
     name: dog
     age: 15
+    
+
+---
+server:
+  port: 8083
+spring:
+  profiles: dev
+
+---
+server:
+  port: 8084
+spring:
+  profiles: prod

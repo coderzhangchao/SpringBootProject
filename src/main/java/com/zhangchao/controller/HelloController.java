@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
 	
 	/**
-	 * 1¡¢²âÊÔÏîÄ¿´î½¨
+	 * 1ã€æµ‹è¯•é¡¹ç›®æ­å»º
 	 * @return
 	 */
 	@ResponseBody
