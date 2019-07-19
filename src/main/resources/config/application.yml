@@ -1,8 +1,8 @@
 # 不能使用Tab退格键
 # k:(空格)v  -- 必须要有空格
 
-debug:
-  true
+# debug:
+#  true
 
 server:
   port: 8888
@@ -11,6 +11,11 @@ spring:
   profiles:
     active: prod
 
+logging:
+  level:
+    com: 
+      zhangchao: warn
+  file: springboot.log
 
 # 测试读取配置文件的值  ${random.value} ${random.int} ${random.value}
 person:

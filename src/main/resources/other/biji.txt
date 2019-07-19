@@ -86,3 +86,98 @@
 			return filter;
 		}
 	}
+	
+//********************************************
+4、日志系统：
+	1) 日志门面:
+	JCL(Jakarta Commons Logging)、SLF4j、jboss-logging
+	日志实现:
+	Log4j、JUL、Log4j2、Logback
+	
+	2) SpringBoot选用 SLF4j 和 Logback
+	
+	log4j和Logback的两种使用组合:
+	1) application --> slf4j-api.jar --> logback-classic.jar,logback-core.jar
+	2) application --> slf4j-api.jar --> slf4j-log412.jar,log4j.jar
+	
+	3) 如何让系统中所有的日志都统一到slf4j：
+		1、将系统中其他日志框架先排除出去；
+		2、用中间包来替换原有的日志框架；
+		3、我们导入slf4j其他的实现。
+		
+	4) 常用配置（文件默认是每天一份）
+	logging.level.com.atguigu=trace
+	# logging.path=
+	#   不指定路径在当前项目下生成springboot.log日志
+	#    可以指定完整的路径；
+	# logging.file=G:/springboot.log
+	#    在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件
+	logging.path=/spring/log
+	#  在控制台输出的日志的格式
+	logging.pattern.console=%d{yyyy‐MM‐dd} [%thread] %‐5level %logger{50} ‐ %msg%n
+	#   指定文件中日志输出的格式
+	logging.pattern.file=%d{yyyy‐MM‐dd} === [%thread] === %‐5level === %logger{50} ==== %msg%n
+	
+	5) 使用自定义的日志文件：
+	给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用它默认配置的了。
+	Logback  -- >  logback-spring.xml  、 logback.xml
+	Log4j2   -- >  log4j2-spring.xml or log4j2.xml
+	logback-spring.xml：日志框架就不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用SpringBoot
+	的高级Profile功能:
+	
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<!‐‐
+		日志输出格式：
+		%d表示日期时间，
+		%thread表示线程名，
+		%‐5level：级别从左显示5个字符宽度
+		%logger{50} 表示logger名字最长50个字符，否则按照句点分割。
+		%msg：日志消息，
+		%n是换行符
+		‐‐>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<springProfile name="dev">
+				<pattern>%d{yyyy‐MM‐dd HH:mm:ss.SSS} ‐‐> [%thread] ‐> %‐5level%logger{50} ‐ %msg%n</pattern>
+			</springProfile>
+			<springProfile name="!dev">
+				<pattern>%d{yyyy‐MM‐dd HH:mm:ss.SSS} == [%thread] = %‐5level%logger{50} ‐ %msg%n</pattern>
+			</springProfile>
+		</layout>
+	</appender>
+	
+	6）如果我们要引入其他框架,一定要把这个框架的默认日志依赖移除掉。
+	slf4j+log4j的方式:
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+		<exclusions>
+			<exclusion>
+				<artifactId>logback-classic</artifactId>
+				<groupId>ch.qos.logback</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<groupId>org.slf4j</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j‐log4j12</artifactId>
+	</dependency>
+
+	切换为log4j2:
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring‐boot‐starter‐web</artifactId>
+		<exclusions>
+			<exclusion>
+				<artifactId>spring‐boot‐starter‐logging</artifactId>
+				<groupId>org.springframework.boot</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring‐boot‐starter‐log4j2</artifactId>
+	</dependency>
