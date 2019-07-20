@@ -1,5 +1,7 @@
 package com.zhangchao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zhangchao.HelloService;
@@ -11,9 +13,11 @@ import org.zhangchao.HelloService;
 @Configuration
 public class MyAppConfig {
 	
+	private final static Logger logger = LoggerFactory.getLogger("MyAppConfig");
+	
     @Bean
     public HelloService helloService(){
-        System.out.println("������@Bean����������������...");
+        logger.info("测试往容器中添加Bean....");
         return new HelloService();
     }
 

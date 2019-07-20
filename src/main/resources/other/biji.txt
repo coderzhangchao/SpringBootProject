@@ -1,3 +1,11 @@
+*******************Maven字符集的设置*********************
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<java.version>1.8</java.version>
+</properties>
+
+//***************************************************
 1、修改Maven的配置文件
 <!-- 使用JDK1.8进行项目的编译，运行，打包 -->
 <profiles>
@@ -181,3 +189,9 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring‐boot‐starter‐log4j2</artifactId>
 	</dependency>
+	
+//***********************************************
+Web功能：
+1、访问首页：
+	静态资源文件夹下放置index.html(欢迎页)
+	
