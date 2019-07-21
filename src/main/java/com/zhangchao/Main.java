@@ -16,9 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * })
  * 
  * @ImportResource(locations= {"classpath:beans.xml"})
- * 
+ *
  */
-//@ImportResource(locations= {"classpath:beans.xml"})
 @SpringBootApplication
 public class Main {
 
