@@ -3,12 +3,16 @@ package com.zhangchao.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
+	
+	private final static Logger logger = LoggerFactory.getLogger(HelloController.class);
 	
 	/**
 	 * 1、测试项目搭建
@@ -17,6 +21,7 @@ public class HelloController {
 	@ResponseBody
 	@RequestMapping("/hello")
 	public String sayHello() {
+		logger.info("info==="+4/0);
 		return "Hello World!";
 	}
 	

@@ -9,7 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Map;
 
 //给容器中加入我们自己定义的ErrorAttributes
-//@Component
+@Component
 public class MyErrorAttributes extends DefaultErrorAttributes {
 	
 	private final static Logger logger = LoggerFactory.getLogger(MyErrorAttributes.class);

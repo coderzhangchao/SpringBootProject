@@ -199,4 +199,11 @@ Web功能：
 		error文件夹下】，发生此状态码的错误就会来到 对应的页面。
 	2）、没有模板引擎（模板引擎找不到这个错误页面），静态资源文件夹下找；
 	3）、以上都没有错误页面，就是默认来到SpringBoot默认的错误提示页面。
+3、server的配置：
+	1、修改和server有关的配置（ServerProperties）
+	org.springframework.boot.autoconfigure.web.ServerProperties
+4、注册三大组件用以下方式:
+	ServletRegistrationBean
+	FilterRegistrationBean
+	ServletListenerRegistrationBean
 	
