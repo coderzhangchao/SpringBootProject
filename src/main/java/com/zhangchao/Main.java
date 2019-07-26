@@ -1,5 +1,6 @@
 package com.zhangchao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +17,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * })
  * 
  * @ImportResource(locations= {"classpath:beans.xml"})
+ * @MapperScan(value = "com.zhangchao.mapper") -- 开启全局mapper扫描,
+    *     每个mapper接口上就不用加 @Mapper注解
  *
  */
+//@MapperScan(value = "com.zhangchao.mapper")
 @SpringBootApplication
 public class Main {
 
