@@ -39,10 +39,16 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
 
 logging:
   level:
     com.zhangchao: info
+            #  测试缓存
+    com.zhangchao.mapper: debug
   file: springboot.log
 
 # 测试读取配置文件的值  ${random.value} ${random.int} ${random.value}

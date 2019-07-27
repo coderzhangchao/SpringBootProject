@@ -41,4 +41,6 @@ public interface UserMapper {
 	
 	@Update("update t_user set username = #{userName} where id = #{id}")
 	public int updateDept(User user);
+	
+	public int deleteEmpById(Integer id);
 }

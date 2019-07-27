@@ -15,4 +15,8 @@
         VALUES (#{lastName},#{email},#{gender},#{dId})
     </insert>
     -->
+    
+    <delete id="deleteEmpById" parameterType="Integer">
+    	delete from t_user where id = #{id}
+    </delete>
 </mapper>

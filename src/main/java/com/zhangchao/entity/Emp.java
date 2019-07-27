@@ -2,7 +2,7 @@ package com.zhangchao.entity;
 
 import java.util.Date;
 
-public class Employee {
+public class Emp {
 
 	private Integer id;
     private String lastName;
@@ -11,7 +11,7 @@ public class Employee {
      * 1 male, 0 female
      */
     private Integer gender;
-    private Department department;
+    private Dept department;
     private Date birth;
 
     public Integer getId() {
@@ -46,11 +46,11 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Department getDepartment() {
+    public Dept getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(Dept department) {
         this.department = department;
     }
 
@@ -61,8 +61,8 @@ public class Employee {
     public void setBirth(Date birth) {
         this.birth = birth;
     }
-    public Employee(Integer id, String lastName, String email, Integer gender,
-                    Department department) {
+    public Emp(Integer id, String lastName, String email, Integer gender,
+                    Dept department) {
         super();
         this.id = id;
         this.lastName = lastName;
@@ -72,7 +72,7 @@ public class Employee {
         this.birth = new Date();
     }
 
-    public Employee() {
+    public Emp() {
     
     }
 

@@ -235,3 +235,11 @@ public class ServletInitializer extends SpringBootServletInitializer {
 	spring.mvc.view.prefix=/WEB-INF/
 	spring.mvc.view.suffix=.jsp
 	
+//-------------------------------------------------------
+缓存的使用步骤：
+1、开启基于注解的缓存 @EnableCaching
+2、标注缓存注解即可：
+	@Cacheable
+	@CacheEvict
+	@CachePut
+	

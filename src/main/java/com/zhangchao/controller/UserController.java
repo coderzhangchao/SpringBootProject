@@ -2,7 +2,6 @@ package com.zhangchao.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,12 @@ public class UserController {
 	public User getUser(@PathVariable("id") Integer id) {
 		User user = userMapper.getUserById(id);
 		return user;
+	}
+	
+	@GetMapping("/delu/{id}")
+	public Integer deleUser(@PathVariable("id") Integer id) {
+		int result = userMapper.deleteEmpById(id);
+		return result;
 	}
 	
 	@GetMapping("/user/alluser")

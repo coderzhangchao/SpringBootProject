@@ -7,29 +7,29 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.zhangchao.entity.Department;
-import com.zhangchao.entity.Employee;
+import com.zhangchao.entity.Dept;
+import com.zhangchao.entity.Emp;
 
 @Repository
 public class EmployeeDao {
 
-	private static Map<Integer, Employee> employees = null;
+	private static Map<Integer, Emp> employees = null;
 	
 	@Autowired
 	private DepartmentDao departmentDao;
 	
 	static{
-		employees = new HashMap<Integer, Employee>();
-		employees.put(1001, new Employee(1001, "E-AA", "aa@163.com", 1, new Department(101, "D-AA")));
-		employees.put(1002, new Employee(1002, "E-BB", "bb@163.com", 1, new Department(102, "D-BB")));
-		employees.put(1003, new Employee(1003, "E-CC", "cc@163.com", 0, new Department(103, "D-CC")));
-		employees.put(1004, new Employee(1004, "E-DD", "dd@163.com", 0, new Department(104, "D-DD")));
-		employees.put(1005, new Employee(1005, "E-EE", "ee@163.com", 1, new Department(105, "D-EE")));
+		employees = new HashMap<Integer, Emp>();
+		employees.put(1001, new Emp(1001, "E-AA", "aa@163.com", 1, new Dept(101, "D-AA")));
+		employees.put(1002, new Emp(1002, "E-BB", "bb@163.com", 1, new Dept(102, "D-BB")));
+		employees.put(1003, new Emp(1003, "E-CC", "cc@163.com", 0, new Dept(103, "D-CC")));
+		employees.put(1004, new Emp(1004, "E-DD", "dd@163.com", 0, new Dept(104, "D-DD")));
+		employees.put(1005, new Emp(1005, "E-EE", "ee@163.com", 1, new Dept(105, "D-EE")));
 	}
 	
 	private static Integer initId = 1006;
 	
-	public void save(Employee employee){
+	public void save(Emp employee){
 		if(employee.getId() == null){
 			employee.setId(initId++);
 		}
@@ -39,11 +39,11 @@ public class EmployeeDao {
 	}
 
 	//查询所有员工
-	public Collection<Employee> getAll(){
+	public Collection<Emp> getAll(){
 		return employees.values();
 	}
 	
-	public Employee get(Integer id){
+	public Emp get(Integer id){
 		return employees.get(id);
 	}
 	

@@ -1,10 +1,11 @@
 package com.zhangchao;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 
 /**
@@ -21,8 +22,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
     *     每个mapper接口上就不用加 @Mapper注解
  *
  */
-//@MapperScan(value = "com.zhangchao.mapper")
+@MapperScan(value = "com.zhangchao.mapper")
 @SpringBootApplication
+@EnableCaching
 public class Main {
 
 	private final static Logger logger = LoggerFactory.getLogger(Main.class);
