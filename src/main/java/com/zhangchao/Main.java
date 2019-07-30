@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 /**
@@ -26,6 +28,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @MapperScan(value = "com.zhangchao.mapper")
 @SpringBootApplication
 @EnableCaching
+@EnableAsync
+@EnableScheduling
 public class Main {
 
 	private final static Logger logger = LoggerFactory.getLogger(Main.class);

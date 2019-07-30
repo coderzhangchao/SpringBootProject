@@ -104,7 +104,11 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-
+		<!-- 邮件的依赖 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-mail</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<!-- 这个插件可以将应用打包成可执行的jar -->
