@@ -107,7 +107,12 @@
 		<!-- 邮件的依赖 -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-mail</artifactId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- 服务监控模块 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 	</dependencies>
 	

@@ -1,0 +1,32 @@
+1、导入依赖：
+	spring-boot-starter-actuator
+2、在配置中开启监控：
+	management.security.enabled=false (1.X)
+	
+	2.X版本中的配置：
+	#actuator端口 
+	management.server.port=9001
+	
+	#修改访问路径  2.0之前默认是/   2.0默认是 /actuator  可以通过这个属性值修改  
+	management.endpoints.web.base-path=/monitor
+	
+	#开放所有页面节点  默认只开启了health、info两个节点
+	management.endpoints.web.exposure.include=*
+	
+	#显示健康具体信息  默认不会显示详细信息  
+	management.endpoints.health.show-details=always
+
+
+3、可访问的端点：
+autoconfig     所有自动配置信息
+auditevents    审计事件
+beans          所有Bean的信息
+configprops    所有配置属性
+dump           线程状态信息
+env       	        当前环境信息
+health         应用健康状况
+info           当前应用信息
+metrics        应用的各项指标
+mappings       应用@RequestMapping映射路径
+shutdown       关闭当前应用（默认关闭）
+trace          追踪信息（最新的http请求）
